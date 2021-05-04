@@ -44,18 +44,19 @@ public class TimeServiceImpl implements TimeService {
         String timeInWords = "";
         if ((hour >= 1 && hour <= 12) && (minutes >= 0 && minutes <= 59)) {
             String hourInWord = hour == 12 ? numberInWords[1] : numberInWords[hour + 1];
+            var min = minutes == 1 ? " minute" : " minutes";
             if (minutes == 0)
                 timeInWords = numberInWords[hour] + " o'clock";
             else if (minutes == 15)
-                timeInWords = "Quarter past " + numberInWords[hour];
+                timeInWords = "quarter past " + numberInWords[hour];
             else if (minutes == 30)
-                timeInWords = "Half past " + numberInWords[hour];
+                timeInWords = "half past " + numberInWords[hour];
             else if (minutes == 45)
-                timeInWords = "Quarter to " + hourInWord;
+                timeInWords = "quarter to " + hourInWord;
             else if (minutes < 30)
-                timeInWords = numberInWords[minutes] + " past " + numberInWords[hour];
+                timeInWords = numberInWords[minutes] + min + " past " + numberInWords[hour];
             else
-                timeInWords = numberInWords[60 - minutes] + " to " + hourInWord;
+                timeInWords = numberInWords[60 - minutes] + min + " to " + hourInWord;
         } else {
             throw new RuntimeException("Time ranges must be: 1 <= Hour <= 12, 0 <= Minutes < 60");
         }
